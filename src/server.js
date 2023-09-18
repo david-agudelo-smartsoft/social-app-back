@@ -5,11 +5,14 @@ const cors = require('cors');
 const connectDB = require('./config/config');
 const usersRouter = require('./routes/user.routes');
 
+const publicationRouter = require('./routes/publication.routes');
+
 class server {
     constructor(){
         this.app = express();
         this.app.use(express.json());
-        this.app.use('/api/users', usersRouter);
+        this.app.use('/api/users', usersRouter),
+        this.app.use('/api/publications', publicationRouter);
         this.port = process.env.PORT;
         // connect to database
         connectDB();
