@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 const eventSchema = new mongoose.Schema({
-    reaccion:{
+    reaction:{
         type: String,
         required: false,
         default: ['👍', '💚', '😄', '😲', '😥', '😠']
     },
-    comentario:{
+    comment:{
         type: String,
         required: false,
     },
-    id_usuario: {
+    id_user: {
         type: mongoose.Types.ObjectId,
-        ref: 'Usuario',
+        ref: 'User',
         required: true
     }
 },{
@@ -20,4 +20,4 @@ const eventSchema = new mongoose.Schema({
 }
 );
 
-module.exports = mongoose.model('Evento', eventSchema);
+module.exports = mongoose.model('Event', eventSchema);

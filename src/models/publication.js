@@ -1,26 +1,26 @@
 const mongoose = require('mongoose');
 const publicationSchema = new mongoose.Schema({
-    id_usuario: {
+    id_user: {
         type: mongoose.Types.ObjectId,
-        ref: 'Usuario',
+        ref: 'User',
         required: true
     },
-    descripcion: {
+    description: {
         type: String,
         required: true
     },
-    tipoPublicacion: {
+    typePublication: {
         type: String,
         required: true,
         default:['imagen', 'video', 'texto']
     },
-    contenido: {
+    content: {
         type: String,
         required: true
     },
-    id_evento: {
+    id_event: {
         type: mongoose.Types.ObjectId,
-        ref: 'Evento',
+        ref: 'Event',
         required: false
     }
 },{
@@ -29,22 +29,23 @@ const publicationSchema = new mongoose.Schema({
 }
 );
 
-const publicacionConUsuario = async () => {
-    // 1 - Publication --> Usuario
-    const resultado = await publicationSchema.aggregate(
+const publicationUser = async () => {
+    // 1 - Publication --> User
+    const result = await publicationSchema.aggregate(
         [
            {
                 $lookup: {
-                    from: 'Usuario',
-                    localField: "id_usuario",
+                    from: 'User',
+                    localField: "id_user",
                     foreignField: "_id",
-                    as: "usuarioPublicacion"
+                    as: "userPublication"
                 }
-           },{ $unwind: "$usuarioPublicacion"}
+           },{ $unwind: "$userPublication"}
         ]
     )
 
-    console.log(resultado);
+    console.log(result);
 }
 
-module.exports = mongoose.model('Publicacion', publicationSchema);
+
+module.exports = mongoose.model('Publication', publicationSchema);

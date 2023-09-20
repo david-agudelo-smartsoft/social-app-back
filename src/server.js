@@ -11,6 +11,7 @@ class server {
     constructor(){
         this.app = express();
         this.app.use(express.json());
+        this.app.use(cors( {origin:'http://localhost:4200'} ));
         this.app.use('/api/users', usersRouter),
         this.app.use('/api/publications', publicationRouter);
         this.port = process.env.PORT;
@@ -20,7 +21,6 @@ class server {
     }
     middlewares(){
         this.app.use(morgan('dev'));
-        this.app.use(cors());
         this.app.use(express.json());
     }
     execute(){

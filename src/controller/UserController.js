@@ -48,6 +48,7 @@ exports.getUser = async (req, res, next) => {
 
 // Crear usuario
 exports.createUser = async (req, res, next) => {
+    console.log(req.body);
     try {
         req.body.password = bcrypt.hashSync(req.body.password, 10);
         const user = await userSchema.create(req.body);
@@ -56,6 +57,7 @@ exports.createUser = async (req, res, next) => {
             "data": user,
             "msg": "Usuario creado",
         })
+
     } catch (error) {
         res.json({
             "success": false,
@@ -69,7 +71,7 @@ exports.createUser = async (req, res, next) => {
 function createToken(user){
     const payload = {
         userId: user._id,
-        userRol: user.rol,
+        userRol: user.role,
         userName: user.username,
     }
     return jwt.sign(payload, 'secretKey' , {expiresIn: '1h'})

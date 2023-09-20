@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
-    nombre: {
+    name: {
         type: String,
         required: true
     },
-    apellido: {
+    lastName: {
         type: String,
         required: true
     },
@@ -23,16 +23,16 @@ const userSchema = new mongoose.Schema({
         unique: true,
         trim: true,
     },
-    rol:{
+    role:{
         type: String,
         require: true,
         default: ['user', 'admin'],
     },
-    fechaNacimiento:{
+    dateBirth:{
         type: Date,
         require: true,
     },
-    telefono:{
+    phone:{
         type: Number,
         require: true,
     },
@@ -45,4 +45,4 @@ const userSchema = new mongoose.Schema({
     versionKey: false
 });
 
-module.exports = mongoose.model('Usuario', userSchema);
+module.exports = mongoose.model('User', userSchema);

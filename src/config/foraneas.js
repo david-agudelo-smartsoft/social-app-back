@@ -2,185 +2,185 @@ const Publication = require('../models/publication');
 const Event = require('../models/event');
 const Notification = require('../models/notification');
 const Follow = require('../models/follow');
-const Mensaje = require('../models/mensaje');
+const Message = require('../models/message');
 
 
-const publicacionConUsuario = async () => {
+const publicationUser = async () => {
     // 1 - Publication --> Usuario
     const resultado = await Publication.aggregate(
         [
            {
                 $lookup: {
-                    from: 'Usuario',
-                    localField: "id_usuario",
+                    from: 'User',
+                    localField: "id_user",
                     foreignField: "_id",
-                    as: "usuarioPublicacion"
+                    as: "userPublication"
                 }
-           },{ $unwind: "$usuarioPublicacion"}
+           },{ $unwind: "$userPublication"}
         ]
     )
 
     console.log(resultado);
 }
 
-const publicacionConEvento = async () => {
-    // 2 - Publication --> Evento
-    const resultado = await Publication.aggregate(
+const publicationEvent = async () => {
+    // 2 - Publication --> Event
+    const result = await Publication.aggregate(
         [
            {
                 $lookup: {
-                    from: 'Evento',
-                    localField: "id_evento",
+                    from: 'Event',
+                    localField: "id_event",
                     foreignField: "_id",
-                    as: "eventoPublicacion"
+                    as: "eventPublication"
                 }
-           },{ $unwind: "$eventoPublicacion"}
+           },{ $unwind: "$eventPublication"}
         ]
     )
 
-    console.log(resultado);
+    console.log(result);
 }
 
-const eventoConUsuario = async () => {
-    // 3 - Evento --> Usuario
+const eventUser = async () => {
+    // 3 - Event --> User
     const resultado = await Event.aggregate(
         [
            {
                 $lookup: {
-                    from: 'Usuario',
-                    localField: "id_usuario",
+                    from: 'User',
+                    localField: "id_user",
                     foreignField: "_id",
-                    as: "usuarioEvento"
+                    as: "userEvent"
                 }
-           },{ $unwind: "$usuarioEvento"}
+           },{ $unwind: "$userEvent"}
         ]
     )
 
     console.log(resultado);
 }
 
-const notificacionConUsuario = async () => {
-    // 4 - Notification --> Usuario
-    const resultado = await Notification.aggregate(
+const notificationUser = async () => {
+    // 4 - Notification --> User
+    const result = await Notification.aggregate(
         [
            {
                 $lookup: {
-                    from: 'Usuario',
-                    localField: "id_usuario",
+                    from: 'User',
+                    localField: "id_user",
                     foreignField: "_id",
-                    as: "usuarioNotificacion"
+                    as: "userNotification"
                 }
-           },{ $unwind: "$usuarioNotificacion"}
+           },{ $unwind: "$userNotification"}
         ]
     )
 
-    console.log(resultado);
+    console.log(result);
 }
 
-const notificacionConPublicacion = async () => {
+const notificationPublicacation = async () => {
     // 5 - Notification --> Publication
-    const resultado = await Notification.aggregate(
+    const result = await Notification.aggregate(
         [
            {
                 $lookup: {
-                    from: 'Publicacion',
-                    localField: "id_publicacion",
+                    from: 'Publication',
+                    localField: "id_publication",
                     foreignField: "_id",
-                    as: "publicacionNotificacion"
+                    as: "publicationNotification"
                 }
-           },{ $unwind: "$publicacionNotificacion"}
+           },{ $unwind: "$publicationNotification"}
         ]
     )
 
-    console.log(resultado);
+    console.log(result);
 }
 
-const usuarioConfollow = async () => {
-    // 6 - Usuario --> Follow
-    const resultado = await Follow.aggregate(
+const userfollow = async () => {
+    // 6 - User --> Follow
+    const result = await Follow.aggregate(
         [
            {
                 $lookup: {
                     from: 'Follow',
                     localField: "_id",
-                    foreignField: "id_usuario",
-                    as: "followUsuario"
+                    foreignField: "id_user",
+                    as: "followUser"
                 }
-           },{ $unwind: "$followUsuario"}
+           },{ $unwind: "$followUser"}
         ]
     )
 
-    console.log(resultado);
+    console.log(result);
 }
 
-const seguidorConUsuario = async () => {
-    // 7 - Usuario --> Follow --> Usuario
-    const resultado = await Follow.aggregate(
+const followerUser = async () => {
+    // 7 - User --> Follow --> User
+    const result = await Follow.aggregate(
         [
            {
                 $lookup: {
                     from: 'Follow',
                     localField: "_id",
-                    foreignField: "seguidor",
-                    as: "seguidorUsuario"
+                    foreignField: "follower",
+                    as: "followerUser"
                 }
-           },{ $unwind: "$seguidorUsuario"}
+           },{ $unwind: "$followerUser"}
         ]
     )
 
-    console.log(resultado);
+    console.log(result);
 }
 
-const seguidoConUsuario = async () => {
-    // 8 - Usuario --> Follow --> Usuario
-    const resultado = await Follow.aggregate(
+const followedUser = async () => {
+    // 8 - User --> Follow --> User
+    const result = await Follow.aggregate(
         [
            {
                 $lookup: {
                     from: 'Follow',
                     localField: "_id",
-                    foreignField: "seguido",
-                    as: "seguidoUsuario"
+                    foreignField: "followed",
+                    as: "followedUser"
                 }
-           },{ $unwind: "$seguidoUsuario"}
+           },{ $unwind: "$followedUser"}
         ]
     )
 
-    console.log(resultado);
+    console.log(result);
 }
 
-const emiteConUsuario = async () => {
-    // 9 - Mensaje --> Usuario
-    const resultado = await Mensaje.aggregate(
+const emitsUser = async () => {
+    // 9 - Message --> User
+    const result = await Message.aggregate(
         [
            {
                 $lookup: {
-                    from: 'Usuario',
-                    localField: "emite",
+                    from: 'User',
+                    localField: "emits",
                     foreignField: "_id",
-                    as: "usuarioEmisor"
+                    as: "userEmits"
                 }
-           },{ $unwind: "$usuarioEmisor"}
+           },{ $unwind: "$userEmits"}
         ]
     )
 
-    console.log(resultado);
+    console.log(result);
 }
 
-const recibeConUsuario = async () => {
-    // 10 - Mensaje --> Usuario
-    const resultado = await Mensaje.aggregate(
+const receivesUser = async () => {
+    // 10 - Message --> User
+    const result = await Message.aggregate(
         [
            {
                 $lookup: {
-                    from: 'Usuario',
-                    localField: "recibe",
+                    from: 'User',
+                    localField: "receives",
                     foreignField: "_id",
-                    as: "usuarioReceptor"
+                    as: "userReceiver"
                 }
-           },{ $unwind: "$usuarioReceptor"}
+           },{ $unwind: "$userReceiver"}
         ]
     )
 
-    console.log(resultado);
+    console.log(result);
 }
