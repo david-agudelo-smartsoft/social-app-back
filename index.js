@@ -10,3 +10,4 @@ if (process.env.DEVELOPMENT === "false") {
 
 module.exports.handler = serverless(serverInstance.app);
 
+module.exports.handler = serverless(serverInstance.app);

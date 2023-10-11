@@ -6,6 +6,9 @@ const connectDB = require('./config/config');
 const usersRouter = require('./routes/user.routes');
 
 const publicationRouter = require('./routes/publication.routes');
+const publicationRouter = require('./routes/publication.routes');
+const uploadRouter = require('./routes/upload.routes');
+
 
 class server {
     constructor(){
@@ -30,6 +33,5 @@ class server {
         });
     }
 }
-
 
 module.exports = server;
