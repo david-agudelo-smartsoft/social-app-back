@@ -9,11 +9,7 @@ const jwt = require('jsonwebtoken')
 exports.getUsers = async (req, res, next) => {
     try{
         const allUsers = await userSchema.find();
-        res.status(200).json({
-            "success": true,
-            "data": allUsers,
-            "msg": "Usuarios encontrados",
-        })
+        res.status(200).json(allUsers)
     } catch(error){
         console.log(error.message);
     }
@@ -39,7 +35,7 @@ exports.getUser = async (req, res, next) => {
     } catch (error) {
         console.log(error.message);
         if( error instanceof mongoose.CastError){
-            next(msgErroe(400, "Id invalido"));
+            next(msgError(400, "Id invalido"));
             return;
         }
         next(error);
