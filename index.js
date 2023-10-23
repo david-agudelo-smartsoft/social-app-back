@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const serverInstance = new server();
 
+
 if (process.env.DEVELOPMENT === "false") {
   serverInstance.execute();
 }
