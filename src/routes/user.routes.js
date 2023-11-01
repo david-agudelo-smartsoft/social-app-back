@@ -3,7 +3,8 @@ const router = express.Router();
 const { getUsers, getUser, createUser, loginUser, updateUser, deleteUser, validEmail,validUsername} = require('../controller/UserController');
 const { loginGoogle } = require('../controller/auth');
 
-router.route('/').get(getUsers).post(createUser);
+router.route('/').get(getUser).post(createUser);
+router.route('/getUsers').get(getUsers);
 
 router.route('/:id').get(getUser).put(updateUser).delete(deleteUser);
 

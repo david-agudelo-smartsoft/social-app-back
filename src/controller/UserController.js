@@ -11,11 +11,7 @@ const { OAuth2Client } = require('google-auth-library');
 exports.getUsers = async (req, res, next) => {
     try{
         const allUsers = await userSchema.find();
-        res.status(200).json({
-            "success": true,
-            "data": allUsers,
-            "msg": "Usuarios encontrados",
-        })
+        res.status(200).json(allUsers)
     } catch(error){
         console.log(error.message);
     }

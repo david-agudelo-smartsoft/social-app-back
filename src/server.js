@@ -4,8 +4,9 @@ const morgan = require('morgan');
 const cors = require('cors');
 const connectDB = require('./config/config');
 const usersRouter = require('./routes/user.routes');
-
 const publicationRouter = require('./routes/publication.routes');
+const uploadRouter = require('./routes/upload.routes');
+
 
 class server {
     constructor(){
@@ -14,6 +15,8 @@ class server {
         this.app.use(cors( {origin:'http://localhost:4200'} ));
         this.app.use('/api/users', usersRouter),
         this.app.use('/api/publications', publicationRouter);
+        this.app.use('/api/uploads', uploadRouter);
+        this.app.use('/uploads', express.static("upload"));
         this.port = process.env.PORT;
         // connect to database
         connectDB();
