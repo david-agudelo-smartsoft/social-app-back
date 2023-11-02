@@ -107,7 +107,6 @@ function handleCreateUserError(error, res) {
 }
 
 
-
 // Crear token
 function createToken(user){
     const payload = {
