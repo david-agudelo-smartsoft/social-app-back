@@ -39,7 +39,16 @@ const userSchema = new mongoose.Schema({
     avatar:{
         type: String,
         require: false,
-    }    
+    },
+    country:{
+        type: String,
+        require: false,
+    },
+    status:{
+        type: String,
+        require: true,
+        default: ['active', 'inactive', 'removed'],
+    },
 },{
     timestamps: true,
     versionKey: false
