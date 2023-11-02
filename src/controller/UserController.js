@@ -102,6 +102,7 @@ exports.loginUser = async (req, res, next) => {
         "msg": "Usuario logueado",
         "token": createToken(user)
     })
+    console.log(user, createToken(user))
 }
 
 // Actualizar usuario
