@@ -5,8 +5,8 @@ const cors = require('cors');
 const connectDB = require('./config/config');
 const usersRouter = require('./routes/user.routes');
 const publicationRouter = require('./routes/publication.routes');
-const uploadRouter = require('./routes/upload.routes');
-const path = require('path');
+const uploadRouter = require('./routes/upload.routes');//jean
+const path = require('path');//jean
 
 
 
@@ -17,7 +17,7 @@ class server {
         this.app.use(cors( {origin:'http://localhost:4200'} ));
         this.app.use('/api/users', usersRouter),
         this.app.use('/api/publications', publicationRouter);
-        //Avatar upload
+        //Avatar upload/handleUpload/jean
         this.app.use('/api/uploads', uploadRouter);
         this.app.use('/uploads', express.static("upload"));
         this.app.get('/api/handleUpload', (req, res) => {
